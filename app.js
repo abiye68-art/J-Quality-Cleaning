@@ -32,14 +32,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    mobileBtn.addEventListener('click', () => {
-        nav.classList.contains('open') ? closeMobileNav() : openMobileNav();
-    });
+    if (mobileBtn && nav) {
+        mobileBtn.addEventListener('click', () => {
+            nav.classList.contains('open') ? closeMobileNav() : openMobileNav();
+        });
 
-    // Close mobile nav on link click
-    nav.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', closeMobileNav);
-    });
+        // Close mobile nav on link click
+        nav.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', closeMobileNav);
+        });
+    }
 
 
     // ——— Sticky Header Shadow ———
@@ -68,11 +70,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    window.addEventListener('scroll', updateBackToTop, { passive: true });
-    
-    backToTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    if (backToTop) {
+        window.addEventListener('scroll', updateBackToTop, { passive: true });
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
 
     // ——— Scroll Reveal Animations ———
@@ -197,8 +201,10 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => {
                 if (response.ok) {
                     formEl.style.display = 'none';
-                    successEl.style.display = 'block';
-                    successEl.classList.add('reveal', 'visible');
+                    if (successEl) {
+                        successEl.style.display = 'block';
+                        successEl.classList.add('reveal', 'visible');
+                    }
                     // Scroll to top of the form area
                     const scrollTarget = formEl.closest('.contact-form-wrapper') || formEl.closest('.app-form-card') || formEl;
                     window.scrollTo({ top: scrollTarget.offsetTop - 100, behavior: 'smooth' });
