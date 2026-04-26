@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Team | J Quality Cleaning Recruitment</title>
+    <meta name="description" content="Apply to join London's most prestigious cleaning team. Flexible hours, premium pay, and a supportive environment for professional cleaners.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        .join-hero {
+            padding: 120px 0 80px;
+            background: var(--navy);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .join-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('join_hero.png') center/cover no-repeat;
+            opacity: 0.25;
+            z-index: 0;
+        }
+
+        .join-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .join-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 60px;
+            padding: 80px 0;
+            align-items: start;
+        }
+
+        .benefits-list {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--beige);
+            color: var(--gold-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .benefit-title {
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 4px;
+        }
+
+        .benefit-text {
+            font-size: 0.9rem;
+            color: var(--slate);
+        }
+
+        .app-form-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+        }
+
+        .form-section-title {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            color: var(--navy);
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .form-section-title:first-child {
+            margin-top: 0;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--charcoal);
+        }
+
+        .checkbox-item input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 992px) {
+            .join-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== NAVIGATION (REUSED) ========== -->
+    <header class="header" id="main-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo" id="logo">
+                <span class="logo-icon">JQ</span>
+                <span class="logo-text">
+                    <span class="logo-name">J Quality</span>
+                    <span class="logo-sub">Cleaning</span>
+                </span>
+            </a>
+            <nav class="nav" id="main-nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#services" class="nav-link">Services</a>
+                <a href="join.html" class="nav-link active">Join the Team</a>
+                <a href="index.html#contact" class="nav-link nav-cta">Get a Quote</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== HERO ========== -->
+    <section class="join-hero">
+        <div class="container join-hero-content">
+            <span class="section-tag" style="color: var(--gold-light);">Careers</span>
+            <h1 class="hero-headline">Build Your Future with<br><em>J Quality Cleaning</em></h1>
+            <p class="hero-sub" style="margin: 0 auto 30px;">We are looking for professional, detail-oriented cleaners to serve London's most prestigious homes. Join a team that values your work and supports your growth.</p>
+        </div>
+    </section>
+
+    <!-- ========== CONTENT GRID ========== -->
+    <div class="container">
+        <div class="join-grid">
+            
+            <div class="benefits-sidebar">
+                <h2 class="section-title section-title-left">Why Join Us?</h2>
+                <p class="section-subtitle">We treat our workforce as our greatest asset. When you join J Quality, you're not just a cleaner—you're a specialist.</p>
+                
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">£</div>
+                        <div>
+                            <p class="benefit-title">Premium Pay Rates</p>
+                            <p class="benefit-text">We pay well above industry standards because we expect the best from our team.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        </div>
+                        <div>
+                            <p class="benefit-title">Total Flexibility</p>
+                            <p class="benefit-text">Choose the shifts and locations that fit your life. Full-time or part-time available.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        </div>
+                        <div>
+                            <p class="benefit-title">Vetted Professionals Only</p>
+                            <p class="benefit-text">Work alongside other high-quality specialists in the safest environments.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="app-form-card">
+                <form id="cleaner-app-form" action="https://formspree.io/f/xwvangqv" method="POST">
+                    <h2 class="form-title">Application Form</h2>
+                    <p class="form-subtitle">Complete this form and our recruitment team will contact you within 24 hours.</p>
+
+                    <h3 class="form-section-title">Personal Details</h3>
+                    <div class="form-group">
+                        <label for="app-name">Full Name</label>
+                        <input type="text" id="app-name" name="name" placeholder="e.g. Maria Santos" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="app-email">Email Address</label>
+                            <input type="email" id="app-email" name="email" placeholder="maria@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="app-phone">Phone Number</label>
+                            <input type="tel" id="app-phone" name="phone" placeholder="07700 900 000" required>
+                        </div>
+                    </div>
+
+                    <h3 class="form-section-title">Experience & Areas</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="app-experience">Years of Experience</label>
+                            <select id="app-experience" name="experience" required>
+                                <option value="" disabled selected>Select years</option>
+                                <option value="0-1">Less than 1 year</option>
+                                <option value="1-3">1 to 3 years</option>
+                                <option value="3-5">3 to 5 years</option>
+                                <option value="5+">5+ years</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="app-postcode">Your Postcode</label>
+                            <input type="text" id="app-postcode" name="postcode" placeholder="e.g. SE10" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Preferred Working Areas</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item"><input type="checkbox" name="area" value="Blackheath"> Blackheath</label>
+                            <label class="checkbox-item"><input type="checkbox" name="area" value="Greenwich"> Greenwich</label>
+                            <label class="checkbox-item"><input type="checkbox" name="area" value="Dulwich"> Dulwich</label>
+                            <label class="checkbox-item"><input type="checkbox" name="area" value="Kensington"> Kensington</label>
+                            <label class="checkbox-item"><input type="checkbox" name="area" value="Chelsea"> Chelsea</label>
+                            <label class="checkbox-item"><input type="checkbox" name="area" value="Richmond"> Richmond</label>
+                        </div>
+                    </div>
+
+                    <h3 class="form-section-title">Documentation</h3>
+                    <div class="form-group">
+                        <label for="app-dbs">Do you have a valid DBS check?</label>
+                        <select id="app-dbs" name="dbs_status" required>
+                            <option value="" disabled selected>Select option</option>
+                            <option value="yes">Yes, I have a current DBS</option>
+                            <option value="pending">No, but I have applied</option>
+                            <option value="no">No, I need to apply</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="app-message">Tell us about your experience</label>
+                        <textarea id="app-message" name="message" rows="4" placeholder="Mention any specific skills (e.g. ironing, upholstery care, office cleaning)..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full" id="app-submit">
+                        Submit My Application
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                    <p class="form-privacy" style="margin-top: 20px;">🔒 Your data is protected and used for recruitment purposes only.</p>
+                </form>
+
+                <div class="form-success" id="app-success" style="display:none; text-align: center;">
+                    <div class="success-icon" style="color: var(--gold); margin-bottom: 20px;">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <h3 class="success-title">Application Received!</h3>
+                    <p class="success-text">Thank you for your interest in joining J Quality Cleaning. Our recruitment team will review your details and contact you within 24 hours.</p>
+                    <button type="button" class="btn-text" id="app-reset" style="margin-top: 20px; color: var(--gold); text-decoration: underline; background: none; border: none; cursor: pointer;">Submit another application</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ========== FOOTER (REUSED) ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo logo-footer">
+                        <span class="logo-icon">JQ</span>
+                        <span class="logo-text">
+                            <span class="logo-name">J Quality</span>
+                            <span class="logo-sub">Cleaning</span>
+                        </span>
+                    </a>
+                    <p class="footer-tagline">The Standard of Clean Your Home Deserves</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <a href="index.html#about">About Us</a>
+                    <a href="join.html">Join the Team</a>
+                    <a href="index.html#contact">Get a Quote</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <p style="font-size: 0.85rem; color: var(--mist);">07785 465 529</p>
+                    <p style="font-size: 0.85rem; color: var(--mist);">info@jqualitycleaning.org</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 J Quality Cleaning. Recruitment Portal.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

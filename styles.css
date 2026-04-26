@@ -1098,7 +1098,7 @@ button {
     letter-spacing: 0.02em;
 }
 
-.form-group input,
+.form-group input:not([type="checkbox"]),
 .form-group select {
     width: 100%;
     padding: 13px 16px;
@@ -1111,6 +1111,41 @@ button {
     transition: all var(--duration) var(--ease);
     outline: none;
     -webkit-appearance: none;
+    appearance: none;
+}
+
+/* Custom Checkbox Styling for Visual Feedback */
+.form-group input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid var(--gold);
+    border-radius: 4px;
+    background: var(--white);
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    transition: all 0.2s ease;
+    margin-right: 8px;
+}
+
+.form-group input[type="checkbox"]:checked {
+    background: var(--gold);
+    border-color: var(--gold);
+}
+
+.form-group input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
 }
 
 .form-group input::placeholder {

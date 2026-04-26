@@ -115,46 +115,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // ——— Lead Capture Form ———
-    const form = document.getElementById('lead-form');
-    const formSuccess = document.getElementById('form-success');
-    const formResetBtn = document.getElementById('form-reset');
-
-    // Force reset on page load to prevent cached success message
-    function resetForm() {
-        form.style.display = 'block';
-        formSuccess.style.display = 'none';
-        form.reset();
+    // ——— Generic Form Handler (AJAX) ———
+    function handleFormSubmission(formId, successId, resetBtnId, subjectPrefix) {
+        const formEl = document.getElementById(formId);
+        if (!formEl) return;
         
-        // Fully reset the submit button
-        const submitBtn = document.getElementById('form-submit');
-        if (submitBtn) {
-            submitBtn.textContent = 'Request My Free Quote';
-            submitBtn.disabled = false;
+        console.log(`Initializing form: ${formId}`); // Debug check
+
+        const successEl = document.getElementById(successId);
+        const submitBtn = formEl.querySelector('button[type="submit"]');
+        const resetBtn = document.getElementById(resetBtnId);
+
+        function reset() {
+            formEl.style.display = 'block';
+            successEl.style.display = 'none';
+            formEl.reset();
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = submitBtn.dataset.originalText || submitBtn.innerHTML;
+            }
         }
-    }
-    
-    // Run on load
-    resetForm();
 
-    if (formResetBtn) {
-        formResetBtn.addEventListener('click', resetForm);
-    }
+        if (resetBtn) {
+            resetBtn.addEventListener('click', reset);
+        }
 
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
+        formEl.addEventListener('submit', function(e) {
+            e.preventDefault();
+            e.stopPropagation(); // Stop any other listeners
+            
+            console.log(`Form ${formId} submitted via AJAX`);
 
-        // Basic validation
-        const name = document.getElementById('form-name').value.trim();
-        const email = document.getElementById('form-email').value.trim();
-        const phone = document.getElementById('form-phone').value.trim();
-        const postcode = document.getElementById('form-postcode').value.trim();
-        const service = document.getElementById('form-service').value;
-
-        if (!name || !email || !phone || !postcode || !service) {
-            // Highlight empty fields
-            form.querySelectorAll('input, select').forEach(field => {
+            // Basic Validation
+            let isValid = true;
+            formEl.querySelectorAll('[required]').forEach(field => {
                 if (!field.value.trim()) {
+                    isValid = false;
                     field.style.borderColor = '#d4534a';
                     field.addEventListener('input', function handler() {
                         this.style.borderColor = '';
@@ -162,61 +158,74 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             });
-            return;
-        }
 
-        // Email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            const emailField = document.getElementById('form-email');
-            emailField.style.borderColor = '#d4534a';
-            emailField.focus();
-            return;
-        }
-
-        // Submit to Formspree
-        const submitBtn = document.getElementById('form-submit');
-        const originalBtnHTML = submitBtn.innerHTML;
-        submitBtn.textContent = 'Sending...';
-        submitBtn.disabled = true;
-
-        const formData = new FormData(form);
-        // Add a hidden _subject for clear email subjects
-        formData.append('_subject', `New Quote Request from ${name} (${postcode})`);
-
-        fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            headers: { 'Accept': 'application/json' }
-        })
-        .then(response => {
-            if (response.ok) {
-                // Success
-                form.style.display = 'none';
-                formSuccess.style.display = 'block';
-                formSuccess.classList.add('reveal', 'visible');
-                console.log('Lead submitted successfully:', { name, email, postcode, service });
-            } else {
-                return response.json().then(data => {
-                    throw new Error(data.errors ? data.errors.map(e => e.message).join(', ') : 'Submission failed');
-                });
+            if (!isValid) {
+                const firstError = formEl.querySelector('[style*="border-color"]');
+                if (firstError) firstError.focus();
+                return;
             }
-        })
-        .catch(error => {
-            console.error('Form error:', error);
-            submitBtn.innerHTML = originalBtnHTML;
-            submitBtn.disabled = false;
-            // Show a user-friendly error
-            const errorMsg = document.createElement('p');
-            errorMsg.textContent = 'Something went wrong. Please call us on 07785 465 529 or try again.';
-            errorMsg.style.cssText = 'color: #d4534a; font-size: 0.85rem; text-align: center; margin-top: 12px;';
-            errorMsg.className = 'form-error-msg';
-            // Remove any previous error
-            const prev = form.querySelector('.form-error-msg');
-            if (prev) prev.remove();
-            form.appendChild(errorMsg);
+
+            // Prepare Submission
+            const originalBtnHTML = submitBtn.innerHTML;
+            if (!submitBtn.dataset.originalText) {
+                submitBtn.dataset.originalText = originalBtnHTML;
+            }
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(formEl);
+            const nameField = formEl.querySelector('[name="name"]');
+            const name = nameField ? nameField.value : 'Applicant';
+            
+            // Handle multiple checkboxes for "area"
+            const areas = [];
+            formEl.querySelectorAll('input[name="area"]:checked').forEach(cb => {
+                areas.push(cb.value);
+            });
+            if (areas.length > 0) {
+                formData.delete('area');
+                formData.append('areas_preferred', areas.join(', '));
+            }
+
+            formData.append('_subject', `${subjectPrefix} from ${name}`);
+
+            fetch(formEl.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            })
+            .then(response => {
+                if (response.ok) {
+                    formEl.style.display = 'none';
+                    successEl.style.display = 'block';
+                    successEl.classList.add('reveal', 'visible');
+                    // Scroll to top of the form area
+                    const scrollTarget = formEl.closest('.contact-form-wrapper') || formEl.closest('.app-form-card') || formEl;
+                    window.scrollTo({ top: scrollTarget.offsetTop - 100, behavior: 'smooth' });
+                } else {
+                    return response.json().then(data => {
+                        throw new Error(data.errors ? data.errors.map(e => e.message).join(', ') : 'Submission failed');
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Form error:', error);
+                submitBtn.innerHTML = submitBtn.dataset.originalText;
+                submitBtn.disabled = false;
+                const errorMsg = document.createElement('p');
+                errorMsg.textContent = 'Submission failed. Please try again or call us.';
+                errorMsg.style.cssText = 'color: #d4534a; font-size: 0.85rem; text-align: center; margin-top: 12px;';
+                errorMsg.className = 'form-error-msg';
+                const prev = formEl.querySelector('.form-error-msg');
+                if (prev) prev.remove();
+                formEl.appendChild(errorMsg);
+            });
         });
-    });
+    }
+
+    // Initialize both forms
+    handleFormSubmission('lead-form', 'form-success', 'form-reset', 'New Quote Request');
+    handleFormSubmission('cleaner-app-form', 'app-success', 'app-reset', 'New Cleaner Application');
 
 
     // ——— Active Nav Highlighting ———
