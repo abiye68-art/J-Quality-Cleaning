@@ -118,6 +118,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // ——— Lead Capture Form ———
     const form = document.getElementById('lead-form');
     const formSuccess = document.getElementById('form-success');
+    const formResetBtn = document.getElementById('form-reset');
+
+    // Force reset on page load to prevent cached success message
+    function resetForm() {
+        form.style.display = 'block';
+        formSuccess.style.display = 'none';
+        form.reset();
+        
+        // Fully reset the submit button
+        const submitBtn = document.getElementById('form-submit');
+        if (submitBtn) {
+            submitBtn.textContent = 'Request My Free Quote';
+            submitBtn.disabled = false;
+        }
+    }
+    
+    // Run on load
+    resetForm();
+
+    if (formResetBtn) {
+        formResetBtn.addEventListener('click', resetForm);
+    }
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
