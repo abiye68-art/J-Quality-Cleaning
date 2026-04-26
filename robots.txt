@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://abiye68-art.github.io/J-Quality-Cleaning/sitemap.xml

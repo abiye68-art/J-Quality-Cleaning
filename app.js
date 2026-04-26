@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = false;
             // Show a user-friendly error
             const errorMsg = document.createElement('p');
-            errorMsg.textContent = 'Something went wrong. Please call us on 07436 606 130 or try again.';
+            errorMsg.textContent = 'Something went wrong. Please call us on 07785 465 529 or try again.';
             errorMsg.style.cssText = 'color: #d4534a; font-size: 0.85rem; text-align: center; margin-top: 12px;';
             errorMsg.className = 'form-error-msg';
             // Remove any previous error

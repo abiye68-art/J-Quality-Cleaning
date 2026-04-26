@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J Quality Cleaning | Client Note Flyer</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Caveat:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --navy: #1a2744;
+            --gold: #c9a96e;
+            --beige: #f7f3ee;
+            --charcoal: #2d2d2d;
+            --font-note: 'Caveat', cursive;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            font-family: var(--font-body);
+        }
+
+        /* A6 Size (105mm x 148mm) */
+        .flyer {
+            width: 105mm;
+            height: 148mm;
+            background: var(--beige);
+            background-image: radial-gradient(var(--gold) 0.5px, transparent 0.5px);
+            background-size: 30px 30px;
+            background-position: 0 0;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* Subtle paper texture */
+        .flyer::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.05;
+            background-image: url('https://www.transparenttextures.com/patterns/felt.png');
+            pointer-events: none;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            z-index: 1;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--navy);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            font-weight: 700;
+            border-radius: 4px;
+        }
+
+        .logo-text {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--navy);
+            line-height: 1;
+        }
+
+        .logo-sub {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+        }
+
+        .note-content {
+            flex-grow: 1;
+            font-family: var(--font-note);
+            font-size: 1.4rem;
+            color: var(--navy);
+            line-height: 1.4;
+            z-index: 1;
+            padding-top: 10px;
+        }
+
+        .note-content p {
+            margin-bottom: 12px;
+        }
+
+        .highlight {
+            color: var(--gold);
+            font-weight: 500;
+            display: inline-block;
+            border-bottom: 1px solid var(--gold);
+        }
+
+        .footer {
+            margin-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding-top: 15px;
+            font-size: 0.65rem;
+            color: var(--charcoal);
+            text-align: center;
+            z-index: 1;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 8px;
+        }
+
+        .website {
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--navy);
+        }
+
+        /* Print Settings */
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+            .flyer {
+                box-shadow: none;
+                border: none;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            background: var(--navy);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: var(--navy);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="controls no-print">
+        <button class="btn" onclick="window.print()">Print Flyer</button>
+        <div style="font-size: 12px; color: #555; max-width: 150px; text-align: center;">
+            Recommended: Print on A6 cardstock (Matte/Textured)
+        </div>
+    </div>
+
+    <div class="flyer">
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">JQ</div>
+                <div class="logo-text">
+                    J Quality
+                    <span class="logo-sub">Cleaning</span>
+                </div>
+            </div>
+            <div style="font-family: var(--font-heading); color: var(--gold); font-size: 0.7rem; font-style: italic; opacity: 0.6;">
+                Bespoke Excellence
+            </div>
+        </div>
+
+        <div class="note-content">
+            <p>Hi there,</p>
+            <p>I wanted to personally thank you for choosing <span style="font-weight:500;">J Quality Cleaning</span>. We take great pride in making your home a sanctuary.</p>
+            <p>As a token of our appreciation, your next booking comes with a <span class="highlight">complimentary fridge deep clean or luxury home fragrance gift</span>.</p>
+            <p>Just mention this note when you next book with us at <span style="font-weight:500;">07785 465 529</span>.</p>            <p>Best regards,</p>
+            <p style="font-size: 1.8rem; margin-top: -5px;">J. <span style="font-size: 1.1rem; opacity: 0.8;">& the Team</span></p>
+        </div>
+
+        <div class="footer">
+            <div class="contact-info">
+                <span>07785 465 529</span>
+                <span>info@jqualitycleaning.org</span>
+            </div>
+            <div class="website">www.jqualitycleaning.org</div>
+        </div>
+    </div>
+
+</body>
+</html>
