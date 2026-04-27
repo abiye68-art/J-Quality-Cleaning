@@ -179,7 +179,7 @@ button {
 .header {
     position: sticky;
     top: 0;
-    z-index: 99;
+    z-index: 1000;
     background: rgba(250, 250, 248, 0.92);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -1447,7 +1447,7 @@ button {
         gap: 0;
         box-shadow: var(--shadow-xl);
         transition: right var(--duration) var(--ease);
-        z-index: 200;
+        z-index: 1001;
         align-items: stretch;
     }
 
@@ -1480,7 +1480,7 @@ button {
 
     .mobile-menu-btn {
         display: flex;
-        z-index: 201;
+        z-index: 1002;
     }
 
     /* Mobile overlay */
@@ -1488,7 +1488,7 @@ button {
         position: fixed;
         inset: 0;
         background: rgba(15,26,46,0.5);
-        z-index: 199;
+        z-index: 999;
         opacity: 0;
         visibility: hidden;
         transition: all var(--duration) var(--ease);
