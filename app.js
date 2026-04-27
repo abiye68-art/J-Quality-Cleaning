@@ -37,11 +37,29 @@ document.addEventListener('DOMContentLoaded', () => {
             nav.classList.contains('open') ? closeMobileNav() : openMobileNav();
         });
 
-        // Close mobile nav on link click
+        // Close mobile nav on link click and handle scrolling
         nav.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                // Delay closing slightly so mobile browsers register the click navigation
-                setTimeout(closeMobileNav, 150);
+            link.addEventListener('click', (e) => {
+                const target = link.getAttribute('href');
+                if (target && target.startsWith('#')) {
+                    e.preventDefault();
+                    closeMobileNav();
+                    const section = document.querySelector(target);
+                    if (section) {
+                        // Account for sticky header
+                        const headerOffset = document.getElementById('main-header').offsetHeight;
+                        const elementPosition = section.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                } else {
+                    // Let the browser navigate naturally to the new page.
+                    // We don't need to close the menu because we're leaving the page.
+                    closeMobileNav();
+                }
             });
         });
     }
