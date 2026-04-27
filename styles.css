@@ -1457,8 +1457,17 @@ button {
 
     .nav-link {
         padding: 16px 0;
-        font-size: 1rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--navy);
         border-bottom: 1px solid var(--border);
+        transition: color var(--duration) var(--ease);
+    }
+
+    .nav-link:hover,
+    .nav-link:active,
+    .nav-link.active {
+        color: var(--gold-dark);
     }
 
     .nav-link::after { display: none; }
